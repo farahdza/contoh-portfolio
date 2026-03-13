@@ -21,11 +21,11 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
   }, []);
 
   const navItems = [
-    { label: 'Home', href: '#home' },
-    { label: 'About', href: '#about' },
-    { label: 'Skills', href: '#skills' },
-    { label: 'Projects', href: '#projects' },
-    { label: 'Contact', href: '#contact' },
+    { label: "About", href: "#about" },
+    { label: "Projects", href: "#projects" },
+    { label: "Skills", href: "#skills" },
+    { label: "Certificates", href: "#certificates" },
+    { label: "Contact", href: "#contact" },
   ];
 
   const scrollToSection = (href: string) => {
@@ -40,11 +40,9 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'glass-strong shadow-card' : 'bg-transparent'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-strong shadow-card"
     >
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 bg-navbg">
         <div className="flex items-center justify-between h-16 md:h-20">
           <motion.a
             href="#home"
@@ -52,10 +50,10 @@ export default function Navbar({ isDark, toggleTheme }: NavbarProps) {
               e.preventDefault();
               scrollToSection('#home');
             }}
-            className="font-display text-xl md:text-2xl font-bold text-gradient cursor-pointer"
+            className="font-display text-xl md:text-2xl font-bold text-pink-500 cursor-pointer"
             whileHover={{ scale: 1.05 }}
           >
-            &lt;Dev /&gt;
+          Farah's Portofolio
           </motion.a>
 
           {/* Desktop Navigation */}

@@ -1,7 +1,11 @@
-import { motion } from 'framer-motion';
-import { Code2, Video, Coffee, Rocket } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Code2, Video, Coffee, Rocket, ChevronDown } from 'lucide-react';
+import { useState } from 'react';
 
 export default function AboutSection() {
+
+  const [open, setOpen] = useState(false);
+
   const stats = [
     { icon: Code2, value: '50+', label: 'Projects Selesai' },
     { icon: Video, value: '100+', label: 'Video Konten' },
@@ -12,6 +16,8 @@ export default function AboutSection() {
   return (
     <section id="about" className="py-20 md:py-32 bg-muted/30">
       <div className="container mx-auto px-4">
+
+        {/* TITLE */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -20,13 +26,18 @@ export default function AboutSection() {
           className="text-center mb-16"
         >
           <span className="text-primary font-medium mb-2 block">Tentang Saya</span>
+
           <h2 className="font-display text-3xl md:text-5xl font-bold mb-4">
             Mengenal Lebih Dekat
           </h2>
+
           <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
         </motion.div>
 
+
         <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+
+          {/* IMAGE */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -34,18 +45,27 @@ export default function AboutSection() {
             transition={{ duration: 0.6 }}
           >
             <div className="relative">
-              <div className="aspect-square rounded-2xl overflow-hidden glass shadow-card">
+
+              <motion.div
+                animate={{ y: [0, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+                className="aspect-square rounded-2xl overflow-hidden glass shadow-card"
+              >
                 <div className="w-full h-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
-                  <span className="text-8xl">👨‍💻</span>
+                  <span className="text-8xl">👩‍💻</span>
                 </div>
-              </div>
+              </motion.div>
+
               <div className="absolute -bottom-6 -right-6 p-4 glass rounded-xl shadow-card">
                 <p className="font-display font-bold text-2xl text-gradient">5+ Tahun</p>
                 <p className="text-sm text-muted-foreground">Pengalaman</p>
               </div>
+
             </div>
           </motion.div>
 
+
+          {/* TEXT */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -53,36 +73,79 @@ export default function AboutSection() {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
+
             <h3 className="font-display text-2xl md:text-3xl font-bold">
-              Passionate Developer &amp; Creator
+              Passionate Developer & Creator &amp; Creator
             </h3>
+
+            {/* TEXT UTAMA */}
             <p className="text-muted-foreground leading-relaxed">
-              Saya adalah seorang Fullstack Web Developer dengan passion yang kuat dalam menciptakan 
-              solusi digital yang inovatif. Dengan pengalaman lebih dari 5 tahun, saya telah 
-              membantu berbagai klien dan perusahaan dalam mewujudkan ide-ide mereka menjadi 
-              aplikasi web yang powerful dan user-friendly.
+              Hi, my name is Farah Dzakirah Fahri, but you can call me Farah.
+              I am a beginner web developer who is passionate about technology and web development.
             </p>
-            <p className="text-muted-foreground leading-relaxed">
-              Selain coding, saya juga aktif sebagai Content Creator, berbagi pengetahuan 
-              tentang pemrograman dan teknologi melalui berbagai platform. Saya percaya bahwa 
-              berbagi ilmu adalah cara terbaik untuk terus belajar dan berkembang.
-            </p>
+
+            {/* BUTTON ACCORDION */}
+            <button
+              onClick={() => setOpen(!open)}
+              className="flex items-center gap-2 text-primary font-medium"
+            >
+              {open ? "Show Less" : "Read More"}
+
+              <motion.div
+                animate={{ rotate: open ? 180 : 0 }}
+                transition={{ duration: 0.3 }}
+              >
+                <ChevronDown size={18} />
+              </motion.div>
+            </button>
+
+
+            {/* ACCORDION CONTENT */}
+            <AnimatePresence>
+              {open && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <p className="text-muted-foreground leading-relaxed">
+                    I enjoy learning new things and building simple web applications
+                    while improving my skills. My goal is to grow as a developer
+                    and create useful, user-friendly websites.
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+
+            {/* STATS */}
             <div className="grid grid-cols-2 gap-4 pt-4">
               {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
+                  whileHover={{ scale: 1.05 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
                   className="p-4 glass rounded-xl text-center hover:shadow-card-hover transition-shadow"
                 >
+
                   <stat.icon className="h-6 w-6 text-primary mx-auto mb-2" />
-                  <p className="font-display text-2xl font-bold">{stat.value}</p>
-                  <p className="text-sm text-muted-foreground">{stat.label}</p>
+
+                  <p className="font-display text-2xl font-bold">
+                    {stat.value}
+                  </p>
+
+                  <p className="text-sm text-muted-foreground">
+                    {stat.label}
+                  </p>
+
                 </motion.div>
               ))}
             </div>
+
           </motion.div>
         </div>
       </div>
