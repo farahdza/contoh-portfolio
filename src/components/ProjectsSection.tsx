@@ -2,8 +2,8 @@ import { motion } from 'framer-motion';
 import inces from '../assets/inces.png.jpg'
 import bakar from '../assets/bakar.png.jpg'
 import baddie from '../assets/baddie.png'
-import marah from '../assets/marah.png.jpg'
-import muah from '../assets/muah.png.jpg'
+import pantai from '../assets/pantai.png'
+import party from '../assets/party.jpg'
 import wlee from '../assets/wlee.png.jpg'
 import { ExternalLink, Github, Play } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -40,7 +40,7 @@ const projects = [
     title: 'AI Content Generator',
     description: 'Tool untuk generate konten menggunakan AI dengan integrasi berbagai model language.',
     tags: ['Python', 'FastAPI', 'OpenAI', 'React'],
-    image: marah,
+    image: pantai,
     color: 'from-green-500/20 to-teal-500/20',
     github: '#',
     demo: '#',
@@ -49,7 +49,7 @@ const projects = [
     title: 'Video Editing Tutorial',
     description: 'Seri tutorial video editing dengan 100+ episode dan 10k+ subscribers.',
     tags: ['Premiere Pro', 'After Effects', 'YouTube'],
-    image: muah,
+    image: party,
     color: 'from-red-500/20 to-orange-500/20',
     isContent: true,
     youtube: '#',
