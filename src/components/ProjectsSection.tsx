@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import inces from '../assets/inces.png.jpg'
 import bakar from '../assets/bakar.png.jpg'
-import baddie from '../assets/baddie.png.png'
+import baddie from '../assets/baddie.png'
 import marah from '../assets/marah.png.jpg'
 import muah from '../assets/muah.png.jpg'
 import wlee from '../assets/wlee.png.jpg'
