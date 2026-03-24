@@ -16,17 +16,17 @@ export default function AboutSection() {
     {
       title: 'Tentang Saya',
       content:
-        'Hi, my name is Farah Dzakirah Fahri, but you can call me Farah. I am a beginner web developer who is passionate about technology and web development. I enjoy learning new things and building simple web applications.',
+        'Hi, my name is Farah Dzakirah Fahri, but you can call me Farah. I am a beginner web developer who is passionate about technology and web development.',
     },
     {
       title: 'Karakter & Sikap',
       content:
-        'Saya adalah pribadi yang disiplin, bertanggung jawab, dan selalu ingin berkembang. Saya suka belajar hal baru, mudah beradaptasi, dan memiliki semangat tinggi dalam menyelesaikan pekerjaan.',
+        'Saya adalah pribadi yang disiplin, bertanggung jawab, dan selalu ingin berkembang.',
     },
     {
       title: 'Tujuan & Visi',
       content:
-        'Tujuan saya adalah menjadi seorang web developer profesional yang mampu menciptakan website yang bermanfaat dan user-friendly. Saya ingin terus berkembang dan berkontribusi dalam dunia teknologi.',
+        'Tujuan saya adalah menjadi web developer profesional yang menciptakan website user-friendly.',
     },
   ];
 
@@ -40,8 +40,9 @@ export default function AboutSection() {
 
         {/* TITLE */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
           <span className="text-primary font-medium mb-2 block">
@@ -52,44 +53,59 @@ export default function AboutSection() {
             Mengenal Lebih Dekat
           </h2>
 
-          <div className="w-20 h-1 bg-primary mx-auto rounded-full" />
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: 80 }}
+            transition={{ duration: 0.6 }}
+            className="h-1 bg-primary mx-auto rounded-full"
+          />
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
 
           {/* IMAGE */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -60 }}
             whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7 }}
           >
-            <div className="relative">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              className="aspect-square rounded-2xl overflow-hidden glass shadow-card"
+            >
               <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity }}
-                className="aspect-square rounded-2xl overflow-hidden glass shadow-card"
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 3, repeat: Infinity }}
+                className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-accent/20"
               >
-                <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-accent/20">
-                  <span className="text-8xl">👩‍💻</span>
-                </div>
+                <span className="text-8xl">👩‍💻</span>
               </motion.div>
-            </div>
+            </motion.div>
           </motion.div>
 
-          {/* TEXT + ACCORDION */}
+          {/* ACCORDION */}
           <div className="space-y-4">
-
             {sections.map((sec, index) => (
-              <div key={index} className="border rounded-xl overflow-hidden">
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.15 }}
+                className="border rounded-xl overflow-hidden backdrop-blur-md"
+              >
 
                 {/* HEADER */}
                 <button
                   onClick={() => toggle(sec.title)}
-                  className="w-full flex justify-between items-center p-4 bg-white/50 hover:bg-white/70 transition"
+                  className="w-full flex justify-between items-center p-4 bg-white/50 hover:bg-white/80 transition-all duration-300"
                 >
-                  <span className="font-semibold">{sec.title}</span>
+                  <span className="font-semibold text-left">
+                    {sec.title}
+                  </span>
 
                   <motion.div
                     animate={{ rotate: open === sec.title ? 180 : 0 }}
+                    transition={{ type: 'spring', stiffness: 200 }}
                   >
                     <ChevronDown />
                   </motion.div>
@@ -102,17 +118,23 @@ export default function AboutSection() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: 'auto', opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.4 }}
-                      className="overflow-hidden px-4 pb-4"
+                      transition={{ duration: 0.4, ease: 'easeInOut' }}
+                      className="overflow-hidden"
                     >
-                      <p className="text-muted-foreground">
+                      <motion.p
+                        initial={{ y: -10 }}
+                        animate={{ y: 0 }}
+                        exit={{ y: -10 }}
+                        transition={{ duration: 0.3 }}
+                        className="px-4 pb-4 text-muted-foreground"
+                      >
                         {sec.content}
-                      </p>
+                      </motion.p>
                     </motion.div>
                   )}
                 </AnimatePresence>
 
-              </div>
+              </motion.div>
             ))}
 
             {/* STATS */}
@@ -120,13 +142,19 @@ export default function AboutSection() {
               {stats.map((stat, index) => (
                 <motion.div
                   key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="p-4 glass rounded-xl text-center"
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: index * 0.1, type: 'spring' }}
+                  whileHover={{ scale: 1.08 }}
+                  className="p-4 glass rounded-xl text-center cursor-pointer"
                 >
-                  <stat.icon className="mx-auto mb-2 text-primary" />
+                  <motion.div
+                    whileHover={{ rotate: 10 }}
+                    className="inline-block"
+                  >
+                    <stat.icon className="mx-auto mb-2 text-primary" />
+                  </motion.div>
+
                   <p className="font-bold text-xl">{stat.value}</p>
                   <p className="text-sm text-muted-foreground">
                     {stat.label}
